@@ -20,7 +20,8 @@ data class PokemonDetail(
     val height: Int,
     val weight: Int,
     val types: List<Type>,
-    @SerializedName("sprites") val sprites: Sprites
+    @SerializedName("sprites") val sprites: Sprites,
+    @SerializedName("cries") val cries: Cries
 )
 
 data class Type(
@@ -42,3 +43,7 @@ data class Showdown(
     @SerializedName("back_default") val imgBack: String,
 
 )
+
+data class Cries(
+    @SerializedName("latest") val url: String
+    )
