@@ -67,4 +67,7 @@ dependencies {
     // Optional - Test Helpers
     testImplementation ("androidx.room:room-testing:2.6.1")
 
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
 }

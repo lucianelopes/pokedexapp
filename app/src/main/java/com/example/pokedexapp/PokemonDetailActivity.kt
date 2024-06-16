@@ -2,6 +2,7 @@ package com.example.pokedexapp
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.viewpager2.widget.ViewPager2
 
 class PokemonDetailActivity : AppCompatActivity() {
 
@@ -16,7 +18,9 @@ class PokemonDetailActivity : AppCompatActivity() {
     private lateinit var heightTextView: TextView
     private lateinit var weightTextView: TextView
     private lateinit var typeTextView: TextView
+    private lateinit var frontImageView: ImageView
     private lateinit var database: PokemonDatabase
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         heightTextView = findViewById(R.id.pokemonHeightTextView)
         weightTextView = findViewById(R.id.pokemonWeightTextView)
         typeTextView = findViewById(R.id.pokemonTypeTextView)
+        viewPager = findViewById(R.id.pokemonViewPager)
 
         val pokemonName = intent.getStringExtra("POKEMON_NAME")
         val pokemonUrl = intent.getStringExtra("POKEMON_URL")
@@ -33,6 +38,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         nameTextView.text = pokemonName
 
         database = PokemonDatabase.getDatabase(this)
+
 
         if (pokemonUrl != null) {
             val pokemonId = extractPokemonIdFromUrl(pokemonUrl)
@@ -50,9 +56,16 @@ class PokemonDetailActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val pokemonDetail = response.body()
                     if (pokemonDetail != null) {
-                        heightTextView.text = "Height: ${pokemonDetail.height}"
-                        weightTextView.text = "Weight: ${pokemonDetail.weight}"
-                        typeTextView.text = "Types: ${pokemonDetail.types.joinToString(", ") { it.type.name }}"
+                        heightTextView.text = "Altura: ${pokemonDetail.height}"
+                        weightTextView.text = "Largura: ${pokemonDetail.weight}"
+                        typeTextView.text = "Tipos: ${pokemonDetail.types.joinToString(", ") { it.type.name }}"
+                        // URL of the image
+                        val imageUrls = listOf(
+                            pokemonDetail.sprites.imgFront,
+                            pokemonDetail.sprites.imgBack,
+                        )
+                        val adapter = ImageCarouselAdapter(this, imageUrls)
+                        viewPager.adapter = adapter
 
                         // Salvar no banco de dados
                         val pokemonEntity = PokemonEntity(
@@ -60,7 +73,8 @@ class PokemonDetailActivity : AppCompatActivity() {
                             name = pokemonDetail.name,
                             height = pokemonDetail.height,
                             weight = pokemonDetail.weight,
-                            types = pokemonDetail.types.joinToString(", ") { it.type.name }
+                            types = pokemonDetail.types.joinToString(", ") { it.type.name },
+                            frontImage = pokemonDetail.sprites.imgFront
                         )
 
                         lifecycleScope.launch {

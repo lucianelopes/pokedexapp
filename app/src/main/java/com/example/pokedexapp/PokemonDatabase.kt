@@ -7,7 +7,7 @@ import android.content.Context
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [PokemonEntity::class, UserEntity::class], version = 2, exportSchema = false)
+@Database(entities = [PokemonEntity::class, UserEntity::class], version = 3, exportSchema = false)
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
     abstract fun userDao(): UserDao
