@@ -43,6 +43,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("junit:junit:4.13.2")
+    implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,7 +69,26 @@ dependencies {
     // Optional - Test Helpers
     testImplementation ("androidx.room:room-testing:2.6.1")
 
-    implementation ("com.squareup.picasso:picasso:2.71828")
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
 
+    // Imagem
+    implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
+
+    // Unit Testing
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:3.11.2")
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+
+    // Instrumented Testing
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1")
+
+    // ViewModel and LiveData Testing (verifique a versão correta)
+    testImplementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
+    testImplementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
 }
