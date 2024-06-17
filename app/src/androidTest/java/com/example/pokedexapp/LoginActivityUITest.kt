@@ -20,8 +20,8 @@ class LoginActivityUITest {
 
     @Test
     fun loginButtonClicked_navigatesToMainActivity() {
-        onView(withId(R.id.editTextUsername)).perform(typeText("testuser"))
-        onView(withId(R.id.editTextPassword)).perform(typeText("password"))
+        onView(withId(R.id.editTextUsername)).perform(typeText("rhodie"))
+        onView(withId(R.id.editTextPassword)).perform(typeText("123456"))
         onView(withId(R.id.buttonLogin)).perform(click())
 
         onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))

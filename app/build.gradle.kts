@@ -81,6 +81,9 @@ dependencies {
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.mockito:mockito-core:3.11.2")
     testImplementation ("androidx.arch.core:core-testing:2.2.0")
+    // Hamcrest dependencies
+    testImplementation ("org.hamcrest:hamcrest-all:1.3")
+    androidTestImplementation ("org.hamcrest:hamcrest-library:1.3")
 
     // Instrumented Testing
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
